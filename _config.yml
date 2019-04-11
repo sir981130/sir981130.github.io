@@ -3,20 +3,20 @@ title: 港岛先生
 subtitle: 个人站
 description: 欢迎来到我的个人站~
 # 头像里面的标题
-avatarTitle: sir981130
+avatarTitle: 大二咸鱼
 # 头像里面的描述
-avatarDesc: learning
-url: "http://sir981130.io"
+avatarDesc: 一直爱我家梦梦
+url: "https://sir981130.github.io"
 
 # Comment
-comment:
-    disqus: leopard
+comment:    
+    disqus: 
     # gitment: xxx // 需要修改 comments.html中的client_id和client_secret
     # uyan: 2143225  # 有言id,登录有言官网申请
 
 # Social
 social:
-    weibo: 
+    #weibo: 
     github: sir981130
     # zhihu: panpanleopard
     # juejin: xxx
