@@ -68,7 +68,7 @@ body {
   -webkit-font-smoothing: antialiased; }
 
 ::selection {
-  background: #27408B; 
+  background: pink; 
   color: #ffffff}
 
 ::-moz-selection {
