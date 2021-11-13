@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    加密算法 - CESHI
+  </title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+  
+<link rel="stylesheet" href="/css/utils/clear.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/default.min.css" rel="stylesheet">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div class="title">
+  <img class="title_img" src="/images/icon.png"/><br>
+  <p id="site_title">&nbspCESHI&nbsp</p>
+</div>
+
+  <div class="navi">
+    <a id="navi_item" href="/#" class="menu-item-link">Home</a>
+    <a id="navi_item" href="/tags" class="menu-item-link">Tags</a>
+    <a id="navi_item" href="/about" class="menu-item-link">About</a>
+    <a id="navi_item" href="/search" class="menu-item-link">Search</a>
+    
+        <a id="navi_item" href="/friendlink" class="menu-item-link">Friendlink</a>
+    
+</div>
+
+<hr/>
+
+
+  <div class="main">
+    
+<link rel="stylesheet" href="/css/post.css">
+
+<post>
+
+  <div class="post_title">
+    加密算法
+  </div>
+
+  <br/><br/>
+
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/xcode.min.css">
+  <script src="/js/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+    <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
+    <script>hljs.initLineNumbersOnLoad();</script>
+  
+  
+
+  <div id="post_content">
+    <h2 id="Base64¶"><a href="#Base64¶" class="headerlink" title="Base64¶"></a>Base64<a target="_blank" rel="noopener" href="https://wiki.x10sec.org/reverse/identify-encode-encryption/introduction/#base64">¶</a></h2><p>Base64 是一种基于 64 个可打印字符来表示二进制数据的表示方法。转换的时候，将 3 字节的数据，先后放入一个 24 位的缓冲区中，先来的字节占高位。数据不足 3 字节的话，于缓冲器中剩下的比特用 0 补足。每次取出 6 比特（因为 <img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c4becc8d811901597b9807eccff60f0897e3701a" alt="{\displaystyle 2^{6}=64}">），按照其值选择<code>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/</code>中的字符作为编码后的输出，直到全部输入数据转换完成。</p>
+<p>通常而言 Base64 的识别特征为索引表，当我们能找到 <code>ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/</code> 这样索引表，再经过简单的分析基本就能判定是 Base64 编码。</p>
+<p><img src="http://ob2hrvcxg.bkt.clouddn.com/20180822140744.png" alt="img"></p>
+<p>当然，有些题目 base64 的索引表是会变的，一些变种的 base64 主要 就是修改了这个索引表。</p>
+<h2 id="Tea¶"><a href="#Tea¶" class="headerlink" title="Tea¶"></a>Tea<a target="_blank" rel="noopener" href="https://wiki.x10sec.org/reverse/identify-encode-encryption/introduction/#tea">¶</a></h2><p>在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6">密码学</a>中，<strong>微型加密算法</strong>（Tiny Encryption Algorithm，TEA）是一种易于描述和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E6%89%A7%E8%A1%8C&action=edit&redlink=1">执行</a>的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A1%8A%E5%AF%86%E7%A2%BC">块密码</a>，通常只需要很少的代码就可实现。其设计者是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%89%91%E6%A1%A5%E5%A4%A7%E5%AD%A6">剑桥大学计算机实验室</a>的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E5%A4%A7%E5%8D%AB%C2%B7%E6%83%A0%E5%8B%92&action=edit&redlink=1">大卫 · 惠勒</a>与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E7%BD%97%E6%9D%B0%C2%B7%E5%B0%BC%E8%BE%BE%E5%A7%86&action=edit&redlink=1">罗杰 · 尼达姆</a>。</p>
+<p>参考代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdint.h&gt;</span><br><span class="line"></span><br><span class="line">void encrypt (uint32_t* v, uint32_t* k) &#123;</span><br><span class="line">    uint32_t v0=v[0], v1=v[1], sum=0, i;           /* set up */</span><br><span class="line">    uint32_t delta=0x9e3779b9;                     /* a key schedule constant */</span><br><span class="line">    uint32_t k0=k[0], k1=k[1], k2=k[2], k3=k[3];   /* cache key */</span><br><span class="line">    for (i=0; i &lt; 32; i++) &#123;                       /* basic cycle start */</span><br><span class="line">        sum += delta;</span><br><span class="line">        v0 += ((v1&lt;&lt;4) + k0) ^ (v1 + sum) ^ ((v1&gt;&gt;5) + k1);</span><br><span class="line">        v1 += ((v0&lt;&lt;4) + k2) ^ (v0 + sum) ^ ((v0&gt;&gt;5) + k3);  </span><br><span class="line">    &#125;                                              /* end cycle */</span><br><span class="line">    v[0]=v0; v[1]=v1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void decrypt (uint32_t* v, uint32_t* k) &#123;</span><br><span class="line">    uint32_t v0=v[0], v1=v[1], sum=0xC6EF3720, i;  /* set up */</span><br><span class="line">    uint32_t delta=0x9e3779b9;                     /* a key schedule constant */</span><br><span class="line">    uint32_t k0=k[0], k1=k[1], k2=k[2], k3=k[3];   /* cache key */</span><br><span class="line">    for (i=0; i&lt;32; i++) &#123;                         /* basic cycle start */</span><br><span class="line">        v1 -= ((v0&lt;&lt;4) + k2) ^ (v0 + sum) ^ ((v0&gt;&gt;5) + k3);</span><br><span class="line">        v0 -= ((v1&lt;&lt;4) + k0) ^ (v1 + sum) ^ ((v1&gt;&gt;5) + k1);</span><br><span class="line">        sum -= delta;                                   </span><br><span class="line">    &#125;                                              /* end cycle */</span><br><span class="line">    v[0]=v0; v[1]=v1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 Tea 算法中其最主要的识别特征就是 拥有一个 image number ：0x9e3779b9 。当然，这 Tea 算法也有魔改的，感兴趣的可以看 2018 0ctf Quals milk-tea。</p>
+<h2 id="RC4¶"><a href="#RC4¶" class="headerlink" title="RC4¶"></a>RC4<a target="_blank" rel="noopener" href="https://wiki.x10sec.org/reverse/identify-encode-encryption/introduction/#rc4">¶</a></h2><p>在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E5%AD%B8">密码学</a>中，<strong>RC4</strong>（来自 Rivest Cipher 4 的缩写）是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B5%81%E5%8A%A0%E5%AF%86">流加密</a>算法，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E9%92%A5">密钥</a>长度可变。它加解密使用相同的密钥，因此也属于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86">对称加密算法</a>。RC4 是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%89%E7%B7%9A%E7%AD%89%E6%95%88%E5%8A%A0%E5%AF%86">有线等效加密</a>（WEP）中采用的加密算法，也曾经是 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%BC%A0%E8%BE%93%E5%B1%82%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE">TLS</a> 可采用的算法之一。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">void rc4_init(unsigned char *s, unsigned char *key, unsigned long Len) //初始化函数</span><br><span class="line">&#123;</span><br><span class="line">    int i =0, j = 0;</span><br><span class="line">    char k[256] = &#123;0&#125;;</span><br><span class="line">    unsigned char tmp = 0;</span><br><span class="line">    for (i=0;i&lt;256;i++) &#123;</span><br><span class="line">        s[i] = i;</span><br><span class="line">        k[i] = key[i%Len];</span><br><span class="line">    &#125;</span><br><span class="line">    for (i=0; i&lt;256; i++) &#123;</span><br><span class="line">        j=(j+s[i]+k[i])%256;</span><br><span class="line">        tmp = s[i];</span><br><span class="line">        s[i] = s[j]; //交换s[i]和s[j]</span><br><span class="line">        s[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">void rc4_crypt(unsigned char *s, unsigned char *Data, unsigned long Len) //加解密</span><br><span class="line">&#123;</span><br><span class="line">    int i = 0, j = 0, t = 0;</span><br><span class="line">    unsigned long k = 0;</span><br><span class="line">    unsigned char tmp;</span><br><span class="line">    for(k=0;k&lt;Len;k++) &#123;</span><br><span class="line">        i=(i+1)%256;</span><br><span class="line">        j=(j+s[i])%256;</span><br><span class="line">        tmp = s[i];</span><br><span class="line">        s[i] = s[j]; //交换s[x]和s[y]</span><br><span class="line">        s[j] = tmp;</span><br><span class="line">        t=(s[i]+s[j])%256;</span><br><span class="line">        Data[k] ^= s[t];</span><br><span class="line">     &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>通过分析初始化代码，可以看出初始化代码中，对字符数组 s 进行了初始化赋值，且赋值分别递增。之后对 s 进行了 256 次交换操作。通过识别初始化代码，可以知道 rc4 算法。</p>
+<p>其伪代码表示为：</p>
+<p>初始化长度为 256 的 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/S%E7%9B%92">S 盒</a>。第一个 for 循环将 0 到 255 的互不重复的元素装入 S 盒。第二个 for 循环根据密钥打乱 S 盒。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> for i from 0 to 255</span><br><span class="line">    S[i] := i</span><br><span class="line">endfor</span><br><span class="line">j := 0</span><br><span class="line">for( i=0 ; i&lt;256 ; i++)</span><br><span class="line">    j := (j + S[i] + key[i mod keylength]) % 256</span><br><span class="line">    swap values of S[i] and S[j]</span><br><span class="line">endfor</span><br></pre></td></tr></table></figure>
+
+<p>下面 i,j 是两个指针。每收到一个字节，就进行 while 循环。通过一定的算法（(a),(b)）定位 S 盒中的一个元素，并与输入字节异或，得到 k。循环中还改变了 S 盒（©）。如果输入的是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%98%8E%E6%96%87">明文</a>，输出的就是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E6%96%87">密文</a>；如果输入的是密文，输出的就是明文。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">i := 0</span><br><span class="line">j := 0</span><br><span class="line">while GeneratingOutput:</span><br><span class="line">    i := (i + 1) mod 256   //a</span><br><span class="line">    j := (j + S[i]) mod 256 //b</span><br><span class="line">    swap values of S[i] and S[j]  //c</span><br><span class="line">    k := inputByte ^ S[(S[i] + S[j]) % 256]</span><br><span class="line">    output K</span><br><span class="line">endwhile</span><br></pre></td></tr></table></figure>
+
+<p>此算法保证每 256 次循环中 S 盒的每个元素至少被交换过一次</p>
+<h2 id="MD5¶"><a href="#MD5¶" class="headerlink" title="MD5¶"></a>MD5<a target="_blank" rel="noopener" href="https://wiki.x10sec.org/reverse/identify-encode-encryption/introduction/#md5">¶</a></h2><p><strong>MD5 消息摘要算法</strong>（英语：MD5 Message-Digest Algorithm），一种被广泛使用的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A2%BC%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8">密码散列函数</a>，可以产生出一个 128 位（16 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82">字节</a>）的散列值（hash value），用于确保信息传输完整一致。MD5 由美国密码学家<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BD%97%E7%BA%B3%E5%BE%B7%C2%B7%E6%9D%8E%E7%BB%B4%E6%96%AF%E7%89%B9">罗纳德 · 李维斯特</a>（Ronald Linn Rivest）设计，于 1992 年公开，用以取代 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/MD4">MD4</a> 算法。这套算法的程序在 <a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc1321">RFC 1321</a> 中被加以规范。</p>
+<p>伪代码表示为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">/Note: All variables are unsigned 32 bits and wrap modulo 2^32 when calculating</span><br><span class="line">var int[64] r, k</span><br><span class="line"></span><br><span class="line">//r specifies the per-round shift amounts</span><br><span class="line">r[ 0..15]：= &#123;7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22&#125; </span><br><span class="line">r[16..31]：= &#123;5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20&#125;</span><br><span class="line">r[32..47]：= &#123;4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23&#125;</span><br><span class="line">r[48..63]：= &#123;6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21&#125;</span><br><span class="line"></span><br><span class="line">//Use binary integer part of the sines of integers as constants:</span><br><span class="line">for i from 0 to 63</span><br><span class="line">    k[i] := floor(abs(sin(i + 1)) × 2^32)</span><br><span class="line"></span><br><span class="line">//Initialize variables:</span><br><span class="line">var int h0 := 0x67452301</span><br><span class="line">var int h1 := 0xEFCDAB89</span><br><span class="line">var int h2 := 0x98BADCFE</span><br><span class="line">var int h3 := 0x10325476</span><br><span class="line"></span><br><span class="line">//Pre-processing:</span><br><span class="line">append &quot;1&quot; bit to message</span><br><span class="line">append &quot;0&quot; bits until message length in bits ≡ 448 (mod 512)</span><br><span class="line">append bit length of message as 64-bit little-endian integer to message</span><br><span class="line"></span><br><span class="line">//Process the message in successive 512-bit chunks:</span><br><span class="line">for each 512-bit chunk of message</span><br><span class="line">    break chunk into sixteen 32-bit little-endian words w[i], 0 ≤ i ≤ 15</span><br><span class="line"></span><br><span class="line">    //Initialize hash value for this chunk:</span><br><span class="line">    var int a := h0</span><br><span class="line">    var int b := h1</span><br><span class="line">    var int c := h2</span><br><span class="line">    var int d := h3</span><br><span class="line"></span><br><span class="line">    //Main loop:</span><br><span class="line">    for i from 0 to 63</span><br><span class="line">        if 0 ≤ i ≤ 15 then</span><br><span class="line">            f := (b and c) or ((not b) and d)</span><br><span class="line">            g := i</span><br><span class="line">        else if 16 ≤ i ≤ 31</span><br><span class="line">            f := (d and b) or ((not d) and c)</span><br><span class="line">            g := (5×i + 1) mod 16</span><br><span class="line">        else if 32 ≤ i ≤ 47</span><br><span class="line">            f := b xor c xor d</span><br><span class="line">            g := (3×i + 5) mod 16</span><br><span class="line">        else if 48 ≤ i ≤ 63</span><br><span class="line">            f := c xor (b or (not d))</span><br><span class="line">            g := (7×i) mod 16</span><br><span class="line"></span><br><span class="line">        temp := d</span><br><span class="line">        d := c</span><br><span class="line">        c := b</span><br><span class="line">        b := leftrotate((a + f + k[i] + w[g]),r[i]) + b</span><br><span class="line">        a := temp</span><br><span class="line">    Next i</span><br><span class="line">    //Add this chunk&#x27;s hash to result so far:</span><br><span class="line">    h0 := h0 + a</span><br><span class="line">    h1 := h1 + b </span><br><span class="line">    h2 := h2 + c</span><br><span class="line">    h3 := h3 + d</span><br><span class="line">End ForEach</span><br><span class="line">var int digest := h0 append h1 append h2 append h3 //(expressed as little-endian)</span><br></pre></td></tr></table></figure>
+
+<p>其鲜明的特征是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">h0 = 0x67452301;</span><br><span class="line">h1 = 0xefcdab89;</span><br><span class="line">h2 = 0x98badcfe;</span><br><span class="line">h3 = 0x10325476;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+  </div>
+
+  <br/>
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">This post has been read：<span id="busuanzi_value_page_pv"></span>times</span>
+  
+  <br/><br/>
+
+
+  
+
+  <div class="copyright" >
+
+    <a class="license-image" rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by
+-nc
+-sa
+/4.0/"><img alt="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by
+-nc
+-sa
+/4.0/80x15.png" />
+    </a>
+
+      <p>This work is licensed under a
+      <a class="license-word-hyper" rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by
+-nc
+-sa
+/4.0/">
+        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+  </div>
+
+
+
+  <div id="top">
+    <a href="#">▲</a>
+    <a href="#footer">▼</a>
+</div>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+<div id="waline"></div>
+<script>
+  Waline({
+    el: '#waline',
+    serverURL: "",
+    visitor: true,
+    lang: "en",
+  });
+</script>
+<style>
+  .vpanel {
+    background: transparent !important;
+  }
+</style>
+
+
+
+
+</post>
+
+  </div>
+
+  <foot id="footer">
+  <hr class="boldline"/>
+  <br>
+
+  <p class="center font">
+    
+      <a target="_blank" rel="noopener" href="https://github.com/socialbiao.github">
+  <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+   <path class="icon_path" d="M427.392 853.504a61.44 61.44 0 0 1-1.450667 15.530667 92.586667 92.586667 0 0 1-10.965333 27.605333c-15.061333 25.301333-40.661333 42.154667-73.642667 42.154667-77.653333 0-108.117333-38.101333-146.261333-133.504C169.216 740.693333 157.013333 725.461333 128 725.461333v-85.333333c77.653333 0 108.117333 38.101333 146.261333 133.504 25.856 64.597333 38.058667 79.786667 67.072 79.786667 0-12.373333-0.170667-23.296-0.512-38.144-0.853333-34.816-0.938667-41.941333 0.554667-51.2 0.64-20.352 5.888-34.773333 16.384-49.066667-95.232-20.736-159.445333-63.573333-196.309333-132.992l-13.824-32.426667C134.186667 510.848 128 467.072 128 416.426667c0-58.24 17.749333-110.336 50.944-153.856-10.368-41.386667-8.96-91.989333 13.909333-149.077334l7.466667-18.688 19.2-6.101333c2.56-0.853333 5.632-1.578667 9.301333-2.133333 37.290667-5.888 90.325333 8.106667 159.701334 52.48a565.930667 565.930667 0 0 1 127.274666-14.208c38.741333 0 77.226667 3.882667 114.048 11.605333 67.456-42.24 119.04-55.509333 155.306667-49.92 3.626667 0.597333 6.741333 1.322667 9.258667 2.133333l19.285333 6.101334 7.466667 18.773333c20.010667 50.218667 23.424 96.469333 16.128 136.96C875.434667 296.32 896 352.597333 896 416.512c0 53.888-3.84 94.378667-14.933333 133.802667l-11.733334 32.170666c-30.677333 69.333333-98.304 112.64-202.538666 133.248 10.837333 15.018667 15.872 30.250667 15.872 52.394667v42.666667l-0.042667 42.666666a13.013333 13.013333 0 0 0 0.341333 2.730667L682.666667 938.794667c-36.352 0-63.36-17.706667-76.672-45.653334a88.277333 88.277333 0 0 1-8.661334-40.277333v-84.736c0-3.584-0.128-3.797333-8.832-12.501333-23.296-23.296-33.834667-40.874667-33.834666-72.832v-38.613334l38.4-3.84c114.346667-11.52 176.512-43.221333 197.12-89.6l9.6-26.325333c7.68-27.562667 10.88-61.098667 10.88-107.946667 0-49.706667-17.365333-90.837333-50.218667-123.648L742.4 274.773333l7.381333-24.448c6.528-21.717333 8.106667-47.402667 1.152-76.714666a158.634667 158.634667 0 0 0-3.584 0.938666c-22.826667 6.4-51.370667 20.053333-85.76 43.008l-15.658666 10.453334-18.304-4.522667a467.754667 467.754667 0 0 0-111.829334-13.269333c-42.709333 0-84.906667 5.418667-123.946666 16.042666l-19.029334 5.205334-16.256-11.136c-35.541333-24.32-65.109333-38.826667-88.746666-45.568a158.293333 158.293333 0 0 0-4.864-1.28c-8.234667 33.92-4.992 61.781333 3.413333 82.688l9.984 25.088-18.346667 19.797333C228.693333 332.629333 213.333333 370.986667 213.333333 416.512c0 41.685333 4.864 76.202667 13.824 102.229333l11.178667 26.453334c27.904 52.352 87.168 83.84 192.853333 95.146666l38.144 4.096v38.357334c0 32-10.538667 49.536-33.834666 72.832-8.704 8.704-8.832 8.96-8.832 12.501333l-0.725334 7.893333c-0.512 2.56-0.512 9.258667 0.170667 37.205334 0.298667 12.8 0.469333 22.997333 0.554667 33.621333a33.962667 33.962667 0 0 1 0.725333 6.656z"/>
+  </svg>
+ </a>
+
+    
+    
+      <a href="mailto:897433829@qq.com">
+  <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M513.78 602.99c-27.28 0.45-53.79-9.09-74.53-26.83l-65.96-56.64c-15.64-13.37-17.48-36.9-4.1-52.54 13.38-15.65 36.9-17.48 52.54-4.1l65.96 56.64c13.68 11.1 33.27 11.1 46.95 0L881.2 253.08l-708.02-2.61c-20.58 0-37.26-16.69-37.26-37.26s16.68-37.26 37.26-37.26H881.2c41.09-2.36 76.32 29.05 78.67 70.14a74.519 74.519 0 0 1-32.46 65.87L580.86 578.38a111.842 111.842 0 0 1-67.08 24.61z m444.57 133.4V438.28c0-20.58-16.68-37.26-37.26-37.26s-37.26 16.69-37.26 37.26V736.4c0 20.58-16.68 37.26-37.26 37.26h-521.7c-20.58 0-37.26 16.69-37.26 37.26s16.68 37.26 37.26 37.26h521.7c61.72 0.01 111.78-50.05 111.78-111.79zM362.12 363.75c0-20.58-16.68-37.26-37.26-37.26h-223.6c-20.58 0-37.26 16.69-37.26 37.26s16.68 37.26 37.26 37.26h223.59c20.58 0.01 37.27-16.68 37.27-37.26z m0 298.12c0-20.58-16.68-37.26-37.26-37.26h-111.8c-20.58 0-37.26 16.69-37.26 37.26s16.68 37.26 37.26 37.26h111.79c20.58 0 37.27-16.69 37.27-37.26z"/>
+  </svg>
+</a>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <a href="/atom.xml">
+  <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M122.88 720.213333a128 128 0 0 0 0 180.906667 128 128 0 0 0 180.906667 0 128 128 0 0 0-180.906667-180.906667z m120.746667 120.746667a42.666667 42.666667 0 0 1-60.586667-60.586667 42.666667 42.666667 0 0 1 60.586667 0 42.666667 42.666667 0 0 1 0 60.586667zM213.333333 512a42.666667 42.666667 0 0 0 0 85.333333 213.333333 213.333333 0 0 1 213.333334 213.333334 42.666667 42.666667 0 0 0 85.333333 0 298.666667 298.666667 0 0 0-298.666667-298.666667z m0-170.666667a42.666667 42.666667 0 0 0 0 85.333334 384 384 0 0 1 384 384 42.666667 42.666667 0 0 0 85.333334 0 472.746667 472.746667 0 0 0-137.386667-331.946667A472.746667 472.746667 0 0 0 213.333333 341.333333z m452.693334 16.64A644.693333 644.693333 0 0 0 213.333333 170.666667a42.666667 42.666667 0 0 0 0 85.333333 554.666667 554.666667 0 0 1 554.666667 554.666667 42.666667 42.666667 0 0 0 85.333333 0 644.693333 644.693333 0 0 0-187.306666-452.693334z"/>
+  </svg>
+</a>
+
+    
+  <p>
+  <br>
+  <p id="hitokoto">:D 获取中...</p>
+  <script src="https://v1.hitokoto.cn/?c=a&encode=js&select=%23hitokoto" defer></script>
+  <br>
+  <p class="center font">
+    &copy - <a href="http://sir981130.github.io">dys</a> -  2021 - Powered by <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/pcrab/hexo-theme-quark"> Quark </a> 
+  </p>
+  <p>
+    <a href="https://beian.miit.gov.cn/" target="_blank"></a>
+  </p>
+  <br/>
+</foot>
+
+</body>
+</html>

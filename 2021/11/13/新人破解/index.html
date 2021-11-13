@@ -46,142 +46,101 @@
 
 
   <div class="main">
-    <div class="list">
-  
-  
-<div class=index_list>
+    
+<link rel="stylesheet" href="/css/post.css">
 
-  <div class="line_1">
-    <div class="index_post_date">
-      「 November 13th 」
-    </div>
-  </div>
+<post>
 
-  <a id="index_post_title" href="/2021/11/13/加密与解密/"></a><br/>
-
-  <div class="blank">
-  
-  </div>
-
-  <div class="index_post_excerpt">
+  <div class="post_title">
     
   </div>
 
-  <!--
-  <a class="more" href="/2021/11/13/加密与解密/">阅读更多</a>
-  -->
+  <br/><br/>
 
-</div>
-
-<div class=index_list>
-
-  <div class="line_1">
-    <div class="index_post_date">
-      「 November 13th 」
-    </div>
-  </div>
-
-  <a id="index_post_title" href="/2021/11/13/指令/"></a><br/>
-
-  <div class="blank">
   
-  </div>
-
-  <div class="index_post_excerpt">
-    
-  </div>
-
-  <!--
-  <a class="more" href="/2021/11/13/指令/">阅读更多</a>
-  -->
-
-</div>
-
-<div class=index_list>
-
-  <div class="line_1">
-    <div class="index_post_date">
-      「 November 13th 」
-    </div>
-  </div>
-
-  <a id="index_post_title" href="/2021/11/13/新人破解/"></a><br/>
-
-  <div class="blank">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/xcode.min.css">
+  <script src="/js/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   
-  </div>
-
-  <div class="index_post_excerpt">
-    
-  </div>
-
-  <!--
-  <a class="more" href="/2021/11/13/新人破解/">阅读更多</a>
-  -->
-
-</div>
-
-<div class=index_list>
-
-  <div class="line_1">
-    <div class="index_post_date">
-      「 November 13th 」
-    </div>
-  </div>
-
-  <a id="index_post_title" href="/2021/11/13/加密算法/">加密算法</a><br/>
-
-  <div class="blank">
+    <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
+    <script>hljs.initLineNumbersOnLoad();</script>
   
-    <a class="index_post_tag" href="/tags/加密算法">
-      加密算法
+  
+
+  <div id="post_content">
+    <h1 id="第六课"><a href="#第六课" class="headerlink" title="第六课"></a>第六课</h1><p>学会快速使用OD</p>
+<p>一 没有壳</p>
+<p><img src="C:\Users\DYS\AppData\Roaming\Typora\typora-user-images\image-20210917003731423.png" alt="image-20210917003731423"></p>
+<p>在其失败上面寻找call判断指令进入</p>
+<p>查找到判断test 将其nop掉</p>
+<p>2.多次返回</p>
+<p><img src="C:\Users\DYS\AppData\Roaming\Typora\typora-user-images\image-20210918003512822.png" alt="image-20210918003512822"></p>
+<p>找到弹窗之前的第一个“返回到”跟随定位到call，往上找je跳转改为jmp跳转，跳过第一个错误提示：</p>
+<p><img src="C:\Users\DYS\AppData\Roaming\Typora\typora-user-images\image-20210918003757872.png" alt="image-20210918003757872"></p>
+<p>作业：多次返回破解。本人使用的是虚拟机XP系统完成破解流程点。<br>1、首先打开OD ，运行，按f3打开 CM（多次返回到）.exe 文件。<br>2、按f9随意输入账户和密码，弹出“请输入七位有效数字”。<br>3、在OD界面点鼠标右键“中文搜索引擎”选择1 搜索ASCII,拉界面置顶，双击“请输入七位有效数字”。<br>4、在子程序入口CALL上面发现一个跳转指令JE，在信息框显示：跳转已实现。双击该指令修改为“jne 0040113F”使用NOP填充前打&#10004;，点汇编。<br>5、再次按f9运行程序，随意输入账户密码，之前弹出点“请输入七位有效数字”变成了“登录失败”，同理。在中文搜索界面双击“登录失败”，界面自动切换为OD“登录失败”界面。<br>6、在子程序入口CALL上面发现JMP无条件跳转指令，无视它，在call和jmp之间有个地址：004015e8 mov ebx，0x6，这个地址信息来自ebx=00000000跳转来自 004015A9，004015A9 显示跳转已实现 004015E8=CM（多次.004015E8，这个je 指令意思是等于则跳转je CM（多次.004015E8，下面就是“恭喜你，登陆成功”，你跳转里还怎么成功。所以必须更改这个指令。<br>6、双击这个指令，更改为jne 004015E8，也就是在je字母中间加一个N，填充后再填写账户密码。显示：“恭喜你，登陆成功”</p>
+<p><img src="C:\Users\DYS\AppData\Roaming\Typora\typora-user-images\image-20210918005445642.png" alt="image-20210918005445642">。<br>7、别开心的太早，还没完，低于1-6位数字都会显示“恭喜你，登陆成功”，超过七位就会弹出“登录账号不能超过6位字符”。<br>8、同理，找到“登录账号不能超过6位字符”地址0040108E，发现上面子程序call上面地址0040106B 跳转指令 jle CM（多次.004010AA信息栏显示“跳转未实现004010AA=CM（多次.004010AA”。修改jie为jmp指令帮它实现。此时对话款填写什么数字都显示“恭喜你，登陆成功”。唯独空格时候显示：“请输入登录账号和密码”，既然是学习，也把它和谐里吧。<br>9、地址0040152A 处将指令je修改jne，填充之。至此，关于所有“返回到”全部搞定。</p>
+<h1 id="第七课"><a href="#第七课" class="headerlink" title="第七课"></a>第七课</h1><h4 id="学习OD"><a href="#学习OD" class="headerlink" title="学习OD"></a>学习OD</h4><h4 id="1-CTRL-F9"><a href="#1-CTRL-F9" class="headerlink" title="1.CTRL+F9"></a>1.<strong>CTRL+F9</strong></h4><p>按一下CTRL+F9就可以让程序快速执行到你现在运行的子程序代码的结尾处。</p>
+
+  </div>
+
+  <br/>
+
+  
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span id="busuanzi_container_site_pv">This post has been read：<span id="busuanzi_value_page_pv"></span>times</span>
+  
+  <br/><br/>
+
+
+  
+
+  <div class="copyright" >
+
+    <a class="license-image" rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by
+-nc
+-sa
+/4.0/"><img alt="Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License" style="border-width:0" src="https://i.creativecommons.org/l/by
+-nc
+-sa
+/4.0/80x15.png" />
     </a>
+
+      <p>This work is licensed under a
+      <a class="license-word-hyper" rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by
+-nc
+-sa
+/4.0/">
+        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+  </div>
+
+
+
+  <div id="top">
+    <a href="#">▲</a>
+    <a href="#footer">▼</a>
+</div>
+
   
-  </div>
-
-  <div class="index_post_excerpt">
-    
-  </div>
-
-  <!--
-  <a class="more" href="/2021/11/13/加密算法/">阅读更多</a>
-  -->
-
-</div>
-
-<div class=index_list>
-
-  <div class="line_1">
-    <div class="index_post_date">
-      「 November 12th 」
-    </div>
-  </div>
-
-  <a id="index_post_title" href="/2021/11/12/hello-world/">Hello World</a><br/>
-
-  <div class="blank">
-  
-  </div>
-
-  <div class="index_post_excerpt">
-    
-  </div>
-
-  <!--
-  <a class="more" href="/2021/11/12/hello-world/">阅读更多</a>
-  -->
-
-</div>
+  <script src="//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js"></script>
+<div id="waline"></div>
+<script>
+  Waline({
+    el: '#waline',
+    serverURL: "",
+    visitor: true,
+    lang: "en",
+  });
+</script>
+<style>
+  .vpanel {
+    background: transparent !important;
+  }
+</style>
 
 
-<div class="page_num">
 
-    
-    
 
-</div>
-
-</div>
+</post>
 
   </div>
 
